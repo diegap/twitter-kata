@@ -42,7 +42,7 @@ object RegisterUserFeature : Spek({
                 assertFailsWith<RuntimeException> { registerUser.execute(user) }
             }
             Then("save is not invoked"){
-                verify(userRepository, times(0)).save(any())
+                verify(userRepository, never()).save(any())
             }
         }
     }
