@@ -7,6 +7,10 @@ import katas.twitter.model.user.Nickname
 import katas.twitter.model.user.RealName
 import katas.twitter.model.user.User
 import katas.twitter.repositories.UserRepository
+import org.amshove.kluent.`should be in`
+import org.amshove.kluent.`should be`
+import org.amshove.kluent.`should equal`
+import org.amshove.kluent.shouldNotHaveTheSameClassAs
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.gherkin.Feature
 import kotlin.test.assertFailsWith
@@ -28,7 +32,10 @@ object UpdateUser : Spek({
 
             Then("the user is updated"){
                 verify(userRepository, atMost(1)).find(user.nickname)
-                verify(userRepository, atMost(1)).save(user)
+                argumentCaptor<User>{
+                    verify(userRepository, atMost(1)).save(capture())
+                    firstValue.realName.value `should equal` "Joaquin Baez"
+                }
             }
         }
 

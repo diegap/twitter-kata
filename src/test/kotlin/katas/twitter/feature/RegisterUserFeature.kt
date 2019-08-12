@@ -28,7 +28,7 @@ object RegisterUserFeature : Spek({
                 registerUser.execute(user)
             }
             Then("a new user is created"){
-                verify(userRepository).save(user)
+                verify(userRepository, atMost(1)).save(user)
             }
         }
 
