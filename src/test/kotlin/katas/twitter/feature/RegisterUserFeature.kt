@@ -15,7 +15,7 @@ import kotlin.test.assertFailsWith
 object RegisterUserFeature : Spek({
 
     Feature("Register a user"){
-        val user = User(RealName("Jack Bauer"), Nickname("@jack"))
+        val user = User(RealName("Jack Bauer"), Nickname("@jack"), setOf())
 
         Scenario("registering a non existing user"){
             val userRepository = mock<UserRepository> {

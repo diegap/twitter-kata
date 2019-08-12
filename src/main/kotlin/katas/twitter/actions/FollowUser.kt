@@ -1,13 +1,13 @@
 package katas.twitter.actions
 
 import katas.twitter.model.user.Nickname
-import katas.twitter.repositories.FollowedUserRepository
+import katas.twitter.repositories.UserRepository
 
-class FollowUser(private val followedUserRepository: FollowedUserRepository) {
+class FollowUser(private val userRepository: UserRepository) {
     fun execute(user: Nickname, follower: Nickname) {
-       followedUserRepository.find(user).map {
-           val follow = it.copy(followers = it.followers.plusElement(follower))
-           followedUserRepository.save(follow)
+       userRepository.find(user).map {
+           val follow = it.copy(follows = it.follows.plusElement(follower))
+           userRepository.save(follow)
        }
     }
 }

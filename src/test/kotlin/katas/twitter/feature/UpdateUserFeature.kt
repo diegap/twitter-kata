@@ -14,7 +14,7 @@ import kotlin.test.assertFailsWith
 object UpdateUser : Spek({
 
     Feature("Update a user"){
-        val user = User(RealName("Jack Bauer"), Nickname("@jack"))
+        val user = User(RealName("Jack Bauer"), Nickname("@jack"), setOf())
 
         Scenario("updating real name of an existing user"){
             val userRepository = mock<UserRepository> {
