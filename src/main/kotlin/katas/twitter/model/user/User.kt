@@ -2,7 +2,7 @@ package katas.twitter.model.user
 
 import katas.twitter.NonEmptyString
 
-class User(val realName: RealName, val nickname: Nickname)
+data class User(val realName: RealName, val nickname: Nickname)
 
 data class RealName(val value: String) : NonEmptyString(value)
 
