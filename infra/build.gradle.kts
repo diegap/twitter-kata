@@ -1,14 +1,13 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-import org.gradle.api.tasks.testing.logging.TestLogEvent
 
 val koinVersion = "1.0.2"
 val ktorVersion = "1.1.4"
 val kmongoVersion = "3.10.2"
+val testContainersVersion = "1.11.3"
 
 plugins {
     id("com.github.johnrengelman.shadow") version "5.0.0"
 }
-
 dependencies {
     compile(project(":domain"))
     compile("org.koin:koin-core:$koinVersion")
@@ -29,6 +28,8 @@ dependencies {
 
     implementation("io.ktor:ktor-client-jackson:$ktorVersion")
     testCompile("org.koin:koin-test:$koinVersion")
+    testCompile("org.testcontainers:testcontainers:$testContainersVersion")
+
 }
 
 tasks {
@@ -41,15 +42,8 @@ tasks {
             attributes(mapOf("Main-Class" to "katas.twitter.AppKt"))
         }
     }
-}
 
-tasks {
     build {
         dependsOn(shadowJar)
-    }
-    test {
-        testLogging {
-            events = TestLogEvent.values().toSet()
-        }
     }
 }
