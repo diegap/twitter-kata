@@ -4,12 +4,14 @@ import arrow.core.Option
 import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
+import katas.twitter.actions.AskFollowers
 import katas.twitter.actions.FollowUser
 import katas.twitter.model.user.Nickname
 import katas.twitter.model.user.RealName
 import katas.twitter.model.user.User
 import katas.twitter.repositories.UserRepository
 import org.amshove.kluent.`should be equal to`
+import org.amshove.kluent.shouldContain
 import org.mockito.Mockito.*
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.gherkin.Feature
@@ -37,6 +39,21 @@ object FollowUserFeature : Spek({
                     verify(userRepository, atMost(1)).save(capture())
                     firstValue.isFollowing(follow) `should be equal to` true
                 }
+            }
+        }
+
+        Scenario("asking who are followers of a given user"){
+            var followers = setOf<Nickname>()
+            When("anyone wants to know who are the followers of a user"){
+                val userRepository = mock<UserRepository> {
+                    on { find(user.nickname) } doReturn Option.just(user.copy(follows = setOf(follow)))
+                    doNothing().`when`(it).save(user)
+                }
+                val askFollowers = AskFollowers(userRepository)
+                followers = askFollowers.execute(user.nickname)
+            }
+            Then("a list of followers is retrieved"){
+                followers shouldContain follow
             }
         }
     }
