@@ -47,7 +47,6 @@ object FollowUserFeature : Spek({
             When("anyone wants to know who are the followers of a user"){
                 val userRepository = mock<UserRepository> {
                     on { find(user.nickname) } doReturn Option.just(user.copy(follows = setOf(follow)))
-                    doNothing().`when`(it).save(user)
                 }
                 val askFollowers = AskFollowers(userRepository)
                 followers = askFollowers.execute(user.nickname)
