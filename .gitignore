@@ -2,7 +2,7 @@
 /build/
 /classes/
 !gradle/wrapper/gradle-wrapper.jar
-/infra/docker/data
+/docker/data
 
 ### STS ###
 .apt_generated
