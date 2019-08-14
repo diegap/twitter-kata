@@ -1,6 +1,6 @@
 package katas.twitter.config
 
-data class MongoDbConfig(
+data class MongoConfig(
         val addresses: String,
         val database: String,
         val userName: String?,
