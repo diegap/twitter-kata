@@ -1,3 +1,4 @@
+import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val arrowVersion = "0.8.2"
@@ -52,7 +53,7 @@ subprojects {
                 includeEngines("spek2")
             }
             testLogging {
-                events("passed", "skipped", "failed")
+                    events = TestLogEvent.values().toSet()
             }
         }
     }

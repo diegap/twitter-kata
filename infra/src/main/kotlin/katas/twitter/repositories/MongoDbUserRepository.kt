@@ -8,12 +8,14 @@ import katas.twitter.config.MongoConfig
 import katas.twitter.model.user.Nickname
 import katas.twitter.model.user.RealName
 import katas.twitter.model.user.User
+import mu.KotlinLogging
 import org.litote.kmongo.*
 
 internal class MongoUserRepository(mongoConfig: MongoConfig) : UserRepository {
 
     private val database : MongoDatabase
     private val collection: MongoCollection<DBUser>
+    private val logger = KotlinLogging.logger {}
 
     companion object {
         private const val CollectionName  = "users"
@@ -31,9 +33,10 @@ internal class MongoUserRepository(mongoConfig: MongoConfig) : UserRepository {
             Option.fromNullable(collection.findOne(DBUser::nickname eq nickname.value)?.toDomain())
 
     override fun save(user: User) {
+        logger.debug { "Attempting to save user ${user.nickname}" }
         val dbUser = DBUser.from(user)
         if (collection.findOneAndReplace(DBUser::nickname eq dbUser.nickname, dbUser) == null){
-            collection.save(dbUser)
+            collection.save(dbUser).also { logger.debug { "User $user saved" } }
         }
     }
 }
