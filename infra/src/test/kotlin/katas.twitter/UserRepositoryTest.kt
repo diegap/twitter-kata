@@ -15,7 +15,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.testcontainers.containers.GenericContainer
 
-class KMongoContainer(imageName: String) : GenericContainer<KMongoContainer>(imageName)
+internal class KMongoContainer(imageName: String) : GenericContainer<KMongoContainer>(imageName)
 
 internal class UserRepositoryTest {
 
