@@ -7,7 +7,7 @@ class RegisterUser(private val userRepository: UserRepository) {
     fun execute(user: User) {
         userRepository.find(user.nickname).let {
             when {
-                it.isDefined() -> throw RuntimeException("User ${user.nickname} already registered")
+                it.isDefined() -> throw RuntimeException("User ${user.nickname.value} already registered")
                 else -> userRepository.save(user)
             }
         }

@@ -8,7 +8,7 @@ class UpdateUser(private val userRepository: UserRepository) {
         userRepository.find(user.nickname).let {
             when {
                 it.isDefined() -> userRepository.save(user)
-                else -> throw RuntimeException("User ${user.nickname} does not exist")
+                else -> throw RuntimeException("User ${user.nickname.value} does not exist")
             }
         }
     }
