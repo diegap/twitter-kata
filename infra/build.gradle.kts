@@ -10,26 +10,9 @@ plugins {
 }
 dependencies {
     compile(project(":domain"))
-    compile("org.koin:koin-core:$koinVersion")
-    compile("io.ktor:ktor-server-core:$ktorVersion")
-    compile("io.ktor:ktor-server-netty:$ktorVersion")
-    compile("io.ktor:ktor-client-core:$ktorVersion")
-    compile("io.ktor:ktor-client-apache:$ktorVersion")
-    compile("io.ktor:ktor-client-logging:$ktorVersion")
-    compile("io.ktor:ktor-client-json:$ktorVersion")
-    compile("io.ktor:ktor-client-jackson:$ktorVersion")
-    compile("io.ktor:ktor-jackson:$ktorVersion")
-    compile("org.litote.kmongo:kmongo:$kmongoVersion"){
-        exclude(group = "com.fasterxml.jackson")
-    }
-    compile("org.litote.kmongo:kmongo-id-jackson:$kmongoVersion"){
-        exclude(group = "com.fasterxml.jackson")
-    }
-
-    implementation("io.ktor:ktor-client-jackson:$ktorVersion")
-    testCompile("org.koin:koin-test:$koinVersion")
+    compile("org.litote.kmongo:kmongo:$kmongoVersion")
+    compile("org.litote.kmongo:kmongo-id-jackson:$kmongoVersion")
     testCompile("org.testcontainers:testcontainers:$testContainersVersion")
-
 }
 
 tasks {
@@ -42,7 +25,9 @@ tasks {
             attributes(mapOf("Main-Class" to "katas.twitter.AppKt"))
         }
     }
-
+    test {
+        useJUnit()
+    }
     build {
         dependsOn(shadowJar)
     }

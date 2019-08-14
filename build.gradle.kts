@@ -51,7 +51,6 @@ subprojects {
             useJUnitPlatform {
                 includeEngines("spek2")
             }
-            useJUnit()
             testLogging {
                 events("passed", "skipped", "failed")
             }
