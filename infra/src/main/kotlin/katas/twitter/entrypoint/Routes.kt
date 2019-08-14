@@ -1,5 +1,6 @@
 package katas.twitter.entrypoint
 
+import arrow.core.Try
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
 import io.ktor.request.receive
@@ -13,6 +14,7 @@ import katas.twitter.model.user.Nickname
 import katas.twitter.model.user.RealName
 import katas.twitter.model.user.User
 import mu.KotlinLogging
+import org.apache.http.HttpStatus
 
 internal fun pingRoute(parentRoute: Route): Route {
     val logger = KotlinLogging.logger {}
@@ -24,7 +26,13 @@ internal fun pingRoute(parentRoute: Route): Route {
         post("/users"){
             call.receive<RestUser>().toDomain().let {
                 logger.debug { "Registering user $it" }
-                koinProxy.get<RegisterUser>().execute(it)
+                val registrationResult = Try { koinProxy.get<RegisterUser>().execute(it)}
+                registrationResult.fold({
+                    logger.error { it }
+                    call.respond(HttpStatusCode.InternalServerError, "Cannot register user")
+                }, {
+                    call.respond(HttpStatusCode.Created, "User registered successfully")
+                })
             }
         }
     }
