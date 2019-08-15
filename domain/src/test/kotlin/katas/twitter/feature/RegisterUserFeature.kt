@@ -22,7 +22,6 @@ object RegisterUserFeature : Spek({
                 on { find(user.nickname) } doReturn Option.empty()
                 doNothing().`when`(it).save(user)
             }
-
             When("a user is registered for the first time"){
                 val registerUser = RegisterUser(userRepository)
                 registerUser.execute(user)
