@@ -33,13 +33,13 @@ internal fun pingRoute(parentRoute: Route): Route {
 internal fun userRoutes(parentRoute: Route) : Route {
     parentRoute {
         post("/users") {
-            val user = call.receive<RestUser>()
+            val user = call.receive<NewUser>()
             logger.debug { "Registering user $user" }
             koinProxy.get<RegisterUser>().execute(user.toDomain())
             call.respond(HttpStatusCode.Created, "User $user registered successfully")
         }
         put("/users/{nickname}") {
-            val user = call.receive<RestUser>()
+            val user = call.receive<NewUser>()
             logger.debug { "Updating user >> ${user.nickname}" }
             koinProxy.get<UpdateUser>().execute(user.toDomain())
             call.respond(HttpStatusCode.OK, "User ${user.nickname} updated")
@@ -63,7 +63,7 @@ internal fun userRoutes(parentRoute: Route) : Route {
 
 internal data class Message(val value: String)
 
-internal data class RestUser(val realName: String?, val nickname: String?, val follows: List<String>?) {
+internal data class NewUser(val realName: String?, val nickname: String?, val follows: List<String>?) {
     fun toDomain(): User = User(
             realName = RealName(realName!!),
             nickname = Nickname(nickname!!),
