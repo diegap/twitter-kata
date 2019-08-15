@@ -1,6 +1,6 @@
 
 # Twitter kata
-Twitter kata implementing IDD + clean architecture
+Twitter server kata implementing IDD + clean architecture
 
 #### Build
 
