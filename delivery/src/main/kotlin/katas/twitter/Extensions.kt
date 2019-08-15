@@ -4,4 +4,4 @@ import org.koin.core.KoinComponent
 
 internal object KoinProxy : KoinComponent
 
-val koinProxy = KoinProxy.getKoin()
+internal val koinProxy = KoinProxy.getKoin()
