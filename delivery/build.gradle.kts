@@ -9,8 +9,6 @@ plugins {
 }
 dependencies {
     compile(project(":infra"))
-    compile("io.github.config4k:config4k:$config4kVersion")
-
     compile("io.ktor:ktor-server-core:$ktorVersion")
     compile("io.ktor:ktor-server-netty:$ktorVersion")
     compile("io.ktor:ktor-client-core:$ktorVersion")
