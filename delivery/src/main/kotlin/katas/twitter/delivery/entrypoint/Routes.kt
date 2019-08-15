@@ -66,7 +66,7 @@ internal fun tweetRoutes(parentRoute: Route) {
             val tweet = call.receive<NewTweet>()
             logger.debug { "Registering tweet $tweet" }
             koinProxy.get<SendTweet>().execute(tweet.toDomain())
-            call.respond(HttpStatusCode.Created, "Tweet $tweet registered successfully")
+            call.respond(HttpStatusCode.Created, "Tweet $tweet saved successfully")
         }
         get("/tweets/{nickname}"){
             val user = call.parameters["nickname"].orEmpty()

@@ -11,7 +11,7 @@ import katas.twitter.infra.config.MongoConfig
 import mu.KotlinLogging
 import org.litote.kmongo.*
 
-class MongoDbTweetRepository(private val mongoConfig: MongoConfig) : TweetRepository {
+class MongoTweetRepository(private val mongoConfig: MongoConfig) : TweetRepository {
 
     private val database : MongoDatabase
     private val collection: MongoCollection<DBTweet>
