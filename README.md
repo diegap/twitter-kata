@@ -11,7 +11,7 @@ You'll need [docker compose](https://docs.docker.com/compose/install/) installed
     $ twitter/docker/docker-compose up
 
 #### Start App
-Once build is finish:
+Once build is finished:
     
     $ twitter/delivery/build/libs/java -jar twitter-kata.jar
     
