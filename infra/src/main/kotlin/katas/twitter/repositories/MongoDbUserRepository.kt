@@ -33,10 +33,11 @@ internal class MongoUserRepository(mongoConfig: MongoConfig) : UserRepository {
             Option.fromNullable(collection.findOne(DBUser::nickname eq nickname.value)?.toDomain())
 
     override fun save(user: User) {
-        logger.debug { "Attempting to save user ${user.nickname}" }
         val dbUser = DBUser.from(user)
         if (collection.findOneAndReplace(DBUser::nickname eq dbUser.nickname, dbUser) == null){
-            collection.save(dbUser).also { logger.debug { "User $user saved" } }
+            collection.save(dbUser).also { logger.debug { "User >> $user created" } }
+        } else {
+            collection.updateOneById(dbUser.nickname, dbUser).also { logger.debug { "User >> $user updated" } }
         }
     }
 }
@@ -58,6 +59,4 @@ data class DBUser(val realName: String, val nickname: String, val follows: Set<S
             )
         }
     }
-
 }
-

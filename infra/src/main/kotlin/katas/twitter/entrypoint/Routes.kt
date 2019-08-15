@@ -16,13 +16,20 @@ import katas.twitter.model.user.RealName
 import katas.twitter.model.user.User
 import mu.KotlinLogging
 
-internal fun pingRoute(parentRoute: Route): Route {
-    val logger = KotlinLogging.logger {}
+val logger = KotlinLogging.logger {}
 
+internal fun pingRoute(parentRoute: Route): Route {
     parentRoute {
         get("/") {
+            logger.debug { "ping!" }
             call.respond(HttpStatusCode.OK, Message("Hello Twitter!"))
         }
+    }
+    return parentRoute
+}
+
+internal fun userRoutes(parentRoute: Route) : Route {
+    parentRoute {
         post("/users") {
             val user = call.receive<RestUser>()
             logger.debug { "Registering user $user" }
@@ -31,11 +38,10 @@ internal fun pingRoute(parentRoute: Route): Route {
         }
         put("/users/{nickname}") {
             val user = call.receive<RestUser>()
-            logger.debug { "Updating user ${user.nickname}" }
+            logger.debug { "Updating user >> ${user.nickname}" }
             koinProxy.get<UpdateUser>().execute(user.toDomain())
             call.respond(HttpStatusCode.OK, "User ${user.nickname} updated")
         }
-
     }
     return parentRoute
 }

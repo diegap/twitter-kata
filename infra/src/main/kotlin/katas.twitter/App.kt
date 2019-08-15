@@ -21,19 +21,23 @@ import katas.twitter.actions.UpdateUser
 import katas.twitter.config.MongoConfig
 import katas.twitter.entrypoint.pingRoute
 import katas.twitter.entrypoint.registerExceptionHandling
+import katas.twitter.entrypoint.userRoutes
 import katas.twitter.repositories.MongoUserRepository
 import katas.twitter.repositories.UserRepository
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
 
 fun Application.ktorMain() {
+    installFeatures()
+}
+
+private fun Application.installFeatures() {
     install(DefaultHeaders)
     install(CallLogging)
     install(Compression)
     install(StatusPages) {
         registerExceptionHandling()
     }
-
     install(ContentNegotiation) {
         jackson {
             configure(SerializationFeature.INDENT_OUTPUT, true)
@@ -46,6 +50,7 @@ fun Application.ktorMain() {
     install(Routing) {
         route("/api/v1") {
             pingRoute(this)
+            userRoutes(this)
         }
     }
 }
