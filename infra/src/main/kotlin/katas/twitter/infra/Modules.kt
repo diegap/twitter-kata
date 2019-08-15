@@ -1,4 +1,4 @@
-package katas.twitter.infra.config
+package katas.twitter.infra
 
 import com.typesafe.config.ConfigFactory
 import io.github.config4k.extract
@@ -8,6 +8,7 @@ import katas.twitter.domain.actions.RegisterUser
 import katas.twitter.domain.actions.UpdateUser
 import katas.twitter.infra.repositories.MongoUserRepository
 import katas.twitter.domain.repositories.UserRepository
+import katas.twitter.infra.config.MongoConfig
 import org.koin.dsl.module
 
 val twitterModule = module {

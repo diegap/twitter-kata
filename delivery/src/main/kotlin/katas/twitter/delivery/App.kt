@@ -12,7 +12,7 @@ import io.ktor.routing.route
 import io.ktor.server.engine.commandLineEnvironment
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
-import katas.twitter.infra.config.twitterModule
+import katas.twitter.infra.twitterModule
 import katas.twitter.delivery.entrypoint.pingRoute
 import katas.twitter.delivery.entrypoint.registerExceptionHandling
 import katas.twitter.delivery.entrypoint.userRoutes
