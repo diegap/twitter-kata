@@ -8,9 +8,7 @@ plugins {
     id("com.github.johnrengelman.shadow") version "5.0.0"
 }
 dependencies {
-    compile(project(":domain"))
     compile(project(":infra"))
-
     compile("io.github.config4k:config4k:$config4kVersion")
 
     compile("io.ktor:ktor-server-core:$ktorVersion")
