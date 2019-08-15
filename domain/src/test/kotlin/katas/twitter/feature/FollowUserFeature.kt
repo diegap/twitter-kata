@@ -4,7 +4,7 @@ import arrow.core.Option
 import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
-import katas.twitter.actions.AskFollowers
+import katas.twitter.actions.AskFollows
 import katas.twitter.actions.FollowUser
 import katas.twitter.model.user.Nickname
 import katas.twitter.model.user.RealName
@@ -48,7 +48,7 @@ object FollowUserFeature : Spek({
                 val userRepository = mock<UserRepository> {
                     on { find(user.nickname) } doReturn Option.just(user.copy(follows = setOf(follow)))
                 }
-                val askFollowers = AskFollowers(userRepository)
+                val askFollowers = AskFollows(userRepository)
                 followers = askFollowers.execute(user.nickname)
             }
             Then("a list of followers is retrieved"){

@@ -14,7 +14,7 @@ import io.ktor.routing.route
 import io.ktor.server.engine.commandLineEnvironment
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
-import katas.twitter.actions.AskFollowers
+import katas.twitter.actions.AskFollows
 import katas.twitter.actions.FollowUser
 import katas.twitter.actions.RegisterUser
 import katas.twitter.actions.UpdateUser
@@ -76,7 +76,7 @@ val twitterModule = module {
     }
 
     single {
-        AskFollowers(get())
+        AskFollows(get())
     }
 }
 

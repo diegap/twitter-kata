@@ -3,12 +3,12 @@ package katas.twitter.entrypoint
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
 import io.ktor.request.receive
-import io.ktor.request.receiveParameters
 import io.ktor.response.respond
 import io.ktor.routing.Route
 import io.ktor.routing.get
 import io.ktor.routing.post
 import io.ktor.routing.put
+import katas.twitter.actions.AskFollows
 import katas.twitter.actions.FollowUser
 import katas.twitter.actions.RegisterUser
 import katas.twitter.actions.UpdateUser
@@ -50,6 +50,12 @@ internal fun userRoutes(parentRoute: Route) : Route {
             logger.debug { "User $user will follow ${follow.nickname}" }
             koinProxy.get<FollowUser>().execute(Nickname(user!!), Nickname(follow.nickname!!))
             call.respond(HttpStatusCode.OK, "User ${follow.nickname} is followed by $user")
+        }
+        get("/users/{nickname}"){
+            val user = call.parameters["nickname"]
+            logger.debug { "Retrieving list of follows for user $user" }
+            val follows = koinProxy.get<AskFollows>().execute(Nickname(user!!))
+            call.respond(HttpStatusCode.OK, follows)
         }
     }
     return parentRoute
