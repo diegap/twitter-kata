@@ -23,7 +23,6 @@ dependencies {
     compile("io.ktor:ktor-jackson:$ktorVersion")
 
     implementation("io.ktor:ktor-client-jackson:$ktorVersion")
-
 }
 
 tasks {
@@ -33,7 +32,7 @@ tasks {
         archiveVersion.set("")
         mergeServiceFiles()
         manifest {
-            attributes(mapOf("Main-Class" to "katas.twitter.AppKt"))
+            attributes(mapOf("Main-Class" to "katas.twitter.delivery.AppKt"))
         }
     }
     build {

@@ -1,4 +1,4 @@
-package katas.twitter.entrypoint
+package katas.twitter.delivery.entrypoint
 
 import arrow.core.Try
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper

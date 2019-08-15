@@ -1,8 +1,8 @@
-package katas.twitter.actions
+package katas.twitter.domain.actions
 
 import arrow.core.getOrElse
-import katas.twitter.model.user.Nickname
-import katas.twitter.repositories.UserRepository
+import katas.twitter.domain.model.user.Nickname
+import katas.twitter.domain.repositories.UserRepository
 
 class AskFollows(private val userRepository: UserRepository) {
     fun execute(nickname: Nickname) =

@@ -1,4 +1,4 @@
-package katas.twitter.config
+package katas.twitter.infra.config
 
 data class MongoConfig(
         val addresses: String,

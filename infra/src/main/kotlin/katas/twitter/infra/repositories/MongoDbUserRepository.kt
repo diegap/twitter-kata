@@ -1,13 +1,14 @@
-package katas.twitter.repositories
+package katas.twitter.infra.repositories
 
 import arrow.core.Option
 import com.mongodb.MongoClientURI
 import com.mongodb.client.MongoCollection
 import com.mongodb.client.MongoDatabase
-import katas.twitter.config.MongoConfig
-import katas.twitter.model.user.Nickname
-import katas.twitter.model.user.RealName
-import katas.twitter.model.user.User
+import katas.twitter.infra.config.MongoConfig
+import katas.twitter.domain.model.user.Nickname
+import katas.twitter.domain.model.user.RealName
+import katas.twitter.domain.model.user.User
+import katas.twitter.domain.repositories.UserRepository
 import mu.KotlinLogging
 import org.litote.kmongo.*
 

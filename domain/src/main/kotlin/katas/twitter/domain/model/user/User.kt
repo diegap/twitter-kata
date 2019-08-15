@@ -1,6 +1,6 @@
-package katas.twitter.model.user
+package katas.twitter.domain.model.user
 
-import katas.twitter.NonEmptyString
+import katas.twitter.domain.NonEmptyString
 
 data class User(val realName: RealName, val nickname: Nickname, val follows: Set<Nickname>) {
     fun isFollowing(nickname: Nickname) = follows.contains(nickname)

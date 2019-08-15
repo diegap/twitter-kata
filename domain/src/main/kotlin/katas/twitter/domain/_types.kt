@@ -1,4 +1,4 @@
-package katas.twitter
+package katas.twitter.domain
 
 abstract class NonEmptyString(value: String){
     init {

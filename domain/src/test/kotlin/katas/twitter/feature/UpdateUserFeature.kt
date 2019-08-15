@@ -2,15 +2,12 @@ package katas.twitter.feature
 
 import arrow.core.Option
 import com.nhaarman.mockitokotlin2.*
-import katas.twitter.actions.UpdateUser
-import katas.twitter.model.user.Nickname
-import katas.twitter.model.user.RealName
-import katas.twitter.model.user.User
-import katas.twitter.repositories.UserRepository
-import org.amshove.kluent.`should be in`
-import org.amshove.kluent.`should be`
+import katas.twitter.domain.actions.UpdateUser
+import katas.twitter.domain.model.user.Nickname
+import katas.twitter.domain.model.user.RealName
+import katas.twitter.domain.model.user.User
+import katas.twitter.domain.repositories.UserRepository
 import org.amshove.kluent.`should equal`
-import org.amshove.kluent.shouldNotHaveTheSameClassAs
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.gherkin.Feature
 import kotlin.test.assertFailsWith

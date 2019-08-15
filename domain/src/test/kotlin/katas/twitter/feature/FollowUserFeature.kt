@@ -4,12 +4,12 @@ import arrow.core.Option
 import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
-import katas.twitter.actions.AskFollows
-import katas.twitter.actions.FollowUser
-import katas.twitter.model.user.Nickname
-import katas.twitter.model.user.RealName
-import katas.twitter.model.user.User
-import katas.twitter.repositories.UserRepository
+import katas.twitter.domain.actions.AskFollows
+import katas.twitter.domain.actions.FollowUser
+import katas.twitter.domain.model.user.Nickname
+import katas.twitter.domain.model.user.RealName
+import katas.twitter.domain.model.user.User
+import katas.twitter.domain.repositories.UserRepository
 import org.amshove.kluent.`should be equal to`
 import org.amshove.kluent.shouldContain
 import org.mockito.Mockito.*

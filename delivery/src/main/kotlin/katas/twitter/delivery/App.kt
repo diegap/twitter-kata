@@ -1,4 +1,4 @@
-package katas.twitter
+package katas.twitter.delivery
 
 import com.fasterxml.jackson.core.util.DefaultIndenter
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter
@@ -12,10 +12,10 @@ import io.ktor.routing.route
 import io.ktor.server.engine.commandLineEnvironment
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
-import katas.twitter.config.twitterModule
-import katas.twitter.entrypoint.pingRoute
-import katas.twitter.entrypoint.registerExceptionHandling
-import katas.twitter.entrypoint.userRoutes
+import katas.twitter.infra.config.twitterModule
+import katas.twitter.delivery.entrypoint.pingRoute
+import katas.twitter.delivery.entrypoint.registerExceptionHandling
+import katas.twitter.delivery.entrypoint.userRoutes
 import org.koin.core.context.startKoin
 
 fun Application.ktorMain() {

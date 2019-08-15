@@ -1,11 +1,11 @@
-package katas.twitter
+package katas.twitter.infra
 
 import arrow.core.Some
-import katas.twitter.config.MongoConfig
-import katas.twitter.model.user.Nickname
-import katas.twitter.model.user.RealName
-import katas.twitter.model.user.User
-import katas.twitter.repositories.MongoUserRepository
+import katas.twitter.infra.config.MongoConfig
+import katas.twitter.domain.model.user.Nickname
+import katas.twitter.domain.model.user.RealName
+import katas.twitter.domain.model.user.User
+import katas.twitter.infra.repositories.MongoUserRepository
 import org.amshove.kluent.shouldBe
 import org.amshove.kluent.shouldBeGreaterThan
 import org.amshove.kluent.shouldEqual

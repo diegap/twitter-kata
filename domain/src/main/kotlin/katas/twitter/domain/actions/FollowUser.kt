@@ -1,7 +1,7 @@
-package katas.twitter.actions
+package katas.twitter.domain.actions
 
-import katas.twitter.model.user.Nickname
-import katas.twitter.repositories.UserRepository
+import katas.twitter.domain.model.user.Nickname
+import katas.twitter.domain.repositories.UserRepository
 
 class FollowUser(private val userRepository: UserRepository) {
     fun execute(user: Nickname, follow: Nickname) {

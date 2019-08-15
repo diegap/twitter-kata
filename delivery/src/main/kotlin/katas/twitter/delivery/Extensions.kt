@@ -1,4 +1,4 @@
-package katas.twitter
+package katas.twitter.delivery
 
 import org.koin.core.KoinComponent
 

@@ -1,4 +1,4 @@
-package katas.twitter.entrypoint
+package katas.twitter.delivery.entrypoint
 
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
@@ -8,14 +8,14 @@ import io.ktor.routing.Route
 import io.ktor.routing.get
 import io.ktor.routing.post
 import io.ktor.routing.put
-import katas.twitter.actions.AskFollows
-import katas.twitter.actions.FollowUser
-import katas.twitter.actions.RegisterUser
-import katas.twitter.actions.UpdateUser
-import katas.twitter.koinProxy
-import katas.twitter.model.user.Nickname
-import katas.twitter.model.user.RealName
-import katas.twitter.model.user.User
+import katas.twitter.domain.actions.AskFollows
+import katas.twitter.domain.actions.FollowUser
+import katas.twitter.domain.actions.RegisterUser
+import katas.twitter.domain.actions.UpdateUser
+import katas.twitter.delivery.koinProxy
+import katas.twitter.domain.model.user.Nickname
+import katas.twitter.domain.model.user.RealName
+import katas.twitter.domain.model.user.User
 import mu.KotlinLogging
 
 val logger = KotlinLogging.logger {}

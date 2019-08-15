@@ -2,11 +2,11 @@ package katas.twitter.feature
 
 import arrow.core.Option
 import com.nhaarman.mockitokotlin2.*
-import katas.twitter.actions.RegisterUser
-import katas.twitter.model.user.Nickname
-import katas.twitter.model.user.RealName
-import katas.twitter.model.user.User
-import katas.twitter.repositories.UserRepository
+import katas.twitter.domain.actions.RegisterUser
+import katas.twitter.domain.model.user.Nickname
+import katas.twitter.domain.model.user.RealName
+import katas.twitter.domain.model.user.User
+import katas.twitter.domain.repositories.UserRepository
 import org.mockito.Mockito.doNothing
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.gherkin.Feature
