@@ -8,11 +8,10 @@ import io.ktor.routing.Route
 import io.ktor.routing.get
 import io.ktor.routing.post
 import io.ktor.routing.put
-import katas.twitter.domain.actions.AskFollows
-import katas.twitter.domain.actions.FollowUser
-import katas.twitter.domain.actions.RegisterUser
-import katas.twitter.domain.actions.UpdateUser
 import katas.twitter.delivery.koinProxy
+import katas.twitter.domain.actions.*
+import katas.twitter.domain.model.tweet.Tweet
+import katas.twitter.domain.model.tweet.TweetContent
 import katas.twitter.domain.model.user.Nickname
 import katas.twitter.domain.model.user.RealName
 import katas.twitter.domain.model.user.User
@@ -46,28 +45,52 @@ internal fun userRoutes(parentRoute: Route) : Route {
         }
         post("/users/{nickname}/follows"){
             val follow = call.receive<UserFollow>()
-            val user = call.parameters["nickname"]
+            val user = call.parameters["nickname"].orEmpty()
             logger.debug { "User $user will follow ${follow.nickname}" }
-            koinProxy.get<FollowUser>().execute(Nickname(user!!), Nickname(follow.nickname!!))
+            koinProxy.get<FollowUser>().execute(Nickname(user), Nickname(follow.nickname))
             call.respond(HttpStatusCode.OK, "User ${follow.nickname} is followed by $user")
         }
         get("/users/{nickname}"){
-            val user = call.parameters["nickname"]
+            val user = call.parameters["nickname"].orEmpty()
             logger.debug { "Retrieving list of follows for user $user" }
-            val follows = koinProxy.get<AskFollows>().execute(Nickname(user!!))
+            val follows = koinProxy.get<AskFollows>().execute(Nickname(user))
             call.respond(HttpStatusCode.OK, follows)
         }
     }
     return parentRoute
 }
 
+internal fun tweetRoutes(parentRoute: Route) {
+    parentRoute {
+        post("/tweets"){
+            val tweet = call.receive<NewTweet>()
+            logger.debug { "Registering tweet $tweet" }
+            koinProxy.get<SendTweet>().execute(tweet.toDomain())
+            call.respond(HttpStatusCode.Created, "Tweet $tweet registered successfully")
+        }
+        get("/tweets/{nickname}"){
+            val user = call.parameters["nickname"].orEmpty()
+            logger.debug { "Retrieving list of tweets from user $user" }
+            val tweets = koinProxy.get<ReadTweets>().execute(Nickname(user))
+            call.respond(HttpStatusCode.OK, tweets)
+        }
+    }
+}
+
 internal data class Message(val value: String)
 
-internal data class NewUser(val realName: String?, val nickname: String?, val follows: List<String>?) {
+internal data class NewUser(val realName: String, val nickname: String, val follows: List<String>?) {
     fun toDomain(): User = User(
-            realName = RealName(realName!!),
-            nickname = Nickname(nickname!!),
+            realName = RealName(realName),
+            nickname = Nickname(nickname),
             follows = follows?.map { Nickname(it) }?.toSet() ?: emptySet()
     )
 }
-internal data class UserFollow(val nickname: String?)
+internal data class UserFollow(val nickname: String)
+
+internal data class NewTweet(val nickname: String, val content: String) {
+    fun toDomain(): Tweet = Tweet(
+            nickName = Nickname(nickname),
+            content = TweetContent(content)
+    )
+}

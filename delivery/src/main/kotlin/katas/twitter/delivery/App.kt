@@ -7,6 +7,7 @@ import io.ktor.application.Application
 import io.ktor.application.install
 import io.ktor.features.*
 import io.ktor.jackson.jackson
+import io.ktor.routing.Route
 import io.ktor.routing.Routing
 import io.ktor.routing.route
 import io.ktor.server.engine.commandLineEnvironment
@@ -15,6 +16,7 @@ import io.ktor.server.netty.Netty
 import katas.twitter.infra.twitterModule
 import katas.twitter.delivery.entrypoint.pingRoute
 import katas.twitter.delivery.entrypoint.registerExceptionHandling
+import katas.twitter.delivery.entrypoint.tweetRoutes
 import katas.twitter.delivery.entrypoint.userRoutes
 import org.koin.core.context.startKoin
 
@@ -42,6 +44,7 @@ private fun Application.installFeatures() {
         route("/api/v1") {
             pingRoute(this)
             userRoutes(this)
+            tweetRoutes(this)
         }
     }
 }

@@ -12,7 +12,7 @@ import org.mockito.Mockito.doNothing
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.gherkin.Feature
 
-object SendTweetFeature : Spek({
+object TweetFeature : Spek({
 
     val sender = Nickname("@joey")
     val tweet = Tweet(nickName=sender, content= TweetContent("HEY HO!"))
