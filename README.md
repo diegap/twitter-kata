@@ -2,6 +2,15 @@
 # Twitter kata
 Twitter server kata implementing IDD + clean architecture
 
+#### Rules
+A user can:
+ - Register using a nickname and real name
+ - Follow another user
+ - Update its real name
+ - Tweet
+ - Know who is following who by nickname
+ - Read tweets from a user by nickname
+
 #### Build
 
     $ ./gradlew clean build
