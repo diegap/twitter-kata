@@ -31,6 +31,10 @@ val twitterModule = module {
     }
 
     single {
+        GetUser(get())
+    }
+
+    single {
         FollowUser(get())
     }
 

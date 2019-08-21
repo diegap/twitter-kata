@@ -40,11 +40,15 @@ Update user
      
      curl -X PUT localhost:8080/api/v1/users/@joey -H "Content-Type: application/json" -d '{"realName":"Joey", "nickname": "@joey", "follows":[]}'
 
+
+Get user         
+     
+     curl localhost:8080/api/v1/users/@joey
      
 Follow user
 
     curl -X POST localhost:8080/api/v1/users/@joey/follows -H "Content-Type: application/json" -d '{"nickname" : "@johnny" }'
 
-List followers
+List follows
     
-    $ curl localhost:8080/api/v1/users/@joey        
+    $ curl localhost:8080/api/v1/users/@joey/follows        
