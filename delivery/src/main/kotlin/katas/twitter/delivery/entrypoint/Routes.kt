@@ -54,11 +54,11 @@ internal fun userRoutes(parentRoute: Route): Route {
             val nickname = call.parameters["nickname"].orEmpty()
             logger.debug { "Retrieving user $nickname" }
             val user = koinProxy.get<GetUser>().execute(Nickname(nickname))
-                    .map {
+                    .map { user ->
                         RestUser(
-                                realName = it.realName.value,
-                                nickname = it.nickname.value,
-                                follows = it.follows.map { it.value }
+                                realName = user.realName.value,
+                                nickname = user.nickname.value,
+                                follows = user.follows.map { it.value }
                         )
                     }
             call.respond(HttpStatusCode.OK, user.orNull()!!)
@@ -76,7 +76,7 @@ internal fun userRoutes(parentRoute: Route): Route {
 internal fun tweetRoutes(parentRoute: Route) {
     parentRoute {
         post("/tweets") {
-            val tweet = call.receive<NewTweet>()
+            val tweet = call.receive<RestTweet>()
             logger.debug { "Registering tweet $tweet" }
             koinProxy.get<SendTweet>().execute(tweet.toDomain())
             call.respond(HttpStatusCode.Created, "Tweet $tweet saved successfully")
@@ -84,7 +84,9 @@ internal fun tweetRoutes(parentRoute: Route) {
         get("/tweets/{nickname}") {
             val user = call.parameters["nickname"].orEmpty()
             logger.debug { "Retrieving list of tweets from user $user" }
-            val tweets = koinProxy.get<ReadTweets>().execute(Nickname(user))
+            val tweets = koinProxy.get<ReadTweets>().execute(Nickname(user)).map {
+                RestTweet(nickname = it.nickName.value, content = it.content.value)
+            }
             call.respond(HttpStatusCode.OK, tweets)
         }
     }
@@ -102,7 +104,7 @@ internal data class RestUser(val realName: String, val nickname: String, val fol
 
 internal data class UserFollow(val nickname: String)
 
-internal data class NewTweet(val nickname: String, val content: String) {
+internal data class RestTweet(val nickname: String, val content: String) {
     fun toDomain(): Tweet = Tweet(
             nickName = Nickname(nickname),
             content = TweetContent(content)
